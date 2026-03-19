@@ -18,7 +18,7 @@ export default function Contact() {
             we&apos;d like to hear from you.
           </p>
           <div className="mt-8 space-y-3 text-slate-600 dark:text-slate-400">
-            <div>&#9993; hello@qasarlabs.com</div>
+            <div>&#9993; saigoel.work@gmail.com</div>
             <div>Mon&ndash;Fri &middot; 09:00&ndash;18:00 IST</div>
           </div>
         </AnimatedSection>

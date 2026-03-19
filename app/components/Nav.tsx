@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Logo from './svg/Logo';
 
 const links = [
   { label: 'Products', href: '#products' },
@@ -51,8 +52,8 @@ export default function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-slate-200 dark:border-slate-700 bg-page/80 dark:bg-[#0a0f1a]/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <a href="#" className="flex items-center gap-3">
-          <div className="h-6 w-6 rounded-md bg-gradient-to-br from-navy to-[#2563eb]" />
+        <a href="#" className="flex items-center gap-2.5">
+          <Logo size={28} />
           <span className="font-semibold tracking-wide text-navy dark:text-slate-100">Qasar Labs</span>
         </a>
         <nav className="hidden items-center gap-8 text-sm text-slate-600 dark:text-slate-400 md:flex">
