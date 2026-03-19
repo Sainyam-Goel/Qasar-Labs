@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from "next/dynamic";
+import { useState } from "react";
 
 const Background = dynamic(() => import("./components/NebulaBackground"), {
   ssr: false,
@@ -8,6 +9,7 @@ const Background = dynamic(() => import("./components/NebulaBackground"), {
 });
 
 function Nav() {
+  const [open, setOpen] = useState(false);
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 backdrop-blur bg-black/40">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
@@ -16,13 +18,39 @@ function Nav() {
           <span className="font-semibold tracking-wide text-white">Qasar Labs</span>
         </a>
         <nav className="hidden items-center gap-8 text-sm text-slate-200 md:flex">
-          <a className="hover:text-white" href="#work">Work</a>
-          <a className="hover:text-white" href="#capabilities">Capabilities</a>
-          <a className="hover:text-white" href="#approach">Approach</a>
-          <a className="hover:text-white" href="#contact">Contact</a>
-          <a className="rounded-full bg-white/10 px-4 py-2 text-white hover:bg-white/20" href="#contact">Start a project</a>
+          <a className="hover:text-white transition-colors" href="#work">Work</a>
+          <a className="hover:text-white transition-colors" href="#capabilities">Capabilities</a>
+          <a className="hover:text-white transition-colors" href="#approach">Approach</a>
+          <a className="hover:text-white transition-colors" href="#contact">Contact</a>
+          <a className="rounded-full bg-white/10 px-4 py-2 text-white hover:bg-white/20 transition-colors" href="#contact">Start a project</a>
         </nav>
+        <button
+          className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
+        >
+          {open ? (
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
+        </button>
       </div>
+      {open && (
+        <div className="md:hidden border-t border-white/10 bg-black/95 px-6 py-4">
+          <nav className="flex flex-col gap-4 text-sm text-slate-200">
+            <a className="hover:text-white transition-colors" href="#work" onClick={() => setOpen(false)}>Work</a>
+            <a className="hover:text-white transition-colors" href="#capabilities" onClick={() => setOpen(false)}>Capabilities</a>
+            <a className="hover:text-white transition-colors" href="#approach" onClick={() => setOpen(false)}>Approach</a>
+            <a className="hover:text-white transition-colors" href="#contact" onClick={() => setOpen(false)}>Contact</a>
+            <a className="rounded-full bg-white/10 px-4 py-2 text-white hover:bg-white/20 transition-colors text-center" href="#contact" onClick={() => setOpen(false)}>Start a project</a>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
@@ -39,10 +67,10 @@ function Hero() {
           We design, harden, and deploy edge‑to‑cloud AI systems for critical environments — from concept to field‑ready.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <a href="#contact" className="rounded-full bg-white px-6 py-3 font-medium text-black hover:bg-slate-100">
+          <a href="#contact" className="rounded-full bg-white px-6 py-3 font-medium text-black hover:bg-slate-100 transition-colors">
             Engage Qasar Labs
           </a>
-          <a href="#work" className="rounded-full border border-white/30 px-6 py-3 font-medium text-white hover:bg-white/10">
+          <a href="#work" className="rounded-full border border-white/30 px-6 py-3 font-medium text-white hover:bg-white/10 transition-colors">
             See work
           </a>
         </div>
@@ -53,20 +81,21 @@ function Hero() {
 }
 
 function LogoBelt() {
-  const logos = ["Kubernetes","Docker","WireGuard","Ansible","PyTorch","ONNX","NVIDIA","ARM"];
+  const logos = ["Kubernetes", "Docker", "WireGuard", "Ansible", "PyTorch", "ONNX", "NVIDIA", "ARM"];
   return (
     <section className="relative border-t border-white/10 bg-black/40 py-10">
       <div className="mx-auto max-w-6xl px-6">
         <p className="mb-6 text-center text-xs uppercase tracking-[0.25em] text-slate-400">
           Built on open standards, trusted by teams working at scale
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 opacity-80">
+        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
           {logos.map((l) => (
-            <div key={l} className="text-slate-300">
-              <svg className="h-6 w-auto" viewBox="0 0 200 40" fill="currentColor" aria-hidden>
-                <rect x="0" y="16" width="200" height="8" rx="4" />
-              </svg>
-            </div>
+            <span
+              key={l}
+              className="text-sm font-semibold tracking-wide text-slate-400 hover:text-slate-200 transition-colors"
+            >
+              {l}
+            </span>
           ))}
         </div>
       </div>
@@ -121,7 +150,7 @@ function SplitCase() {
           </ul>
         </div>
         <div className="order-1 md:order-2">
-          <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+          <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center">
             <div className="h-full w-full bg-[linear-gradient(120deg,rgba(14,165,233,.25),transparent),linear-gradient(300deg,rgba(168,85,247,.25),transparent)]" />
           </div>
         </div>
@@ -184,11 +213,10 @@ function Contact() {
         <div>
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Start a project</h2>
           <p className="mt-3 max-w-xl text-slate-300">
-            Tell us about your constraints. We’ll bring clarity, not jargon.
+            Tell us about your constraints. We&apos;ll bring clarity, not jargon.
           </p>
           <div className="mt-8 space-y-3 text-slate-300">
             <div>✉︎ hello@qasarlabs.com</div>
-            <div>✆ +91 00000 00000</div>
             <div>Mon–Fri · 09:00–18:00 IST</div>
           </div>
         </div>
@@ -204,13 +232,12 @@ function Contact() {
             </div>
             <div className="md:col-span-2">
               <label className="text-sm text-slate-300">Project brief</label>
-              <textarea rows={4} className="mt-1 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 outline-none ring-white/20 focus:ring" placeholder="What are you building? Where does it run? What’s hard?" />
+              <textarea rows={4} className="mt-1 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 outline-none ring-white/20 focus:ring" placeholder="What are you building? Where does it run? What&apos;s hard?" />
             </div>
           </div>
-          <button type="submit" className="mt-6 w-full rounded-lg bg-white px-4 py-2 font-medium text-black hover:bg-slate-100">
+          <button type="submit" className="mt-6 w-full rounded-lg bg-white px-4 py-2 font-medium text-black hover:bg-slate-100 transition-colors">
             Send inquiry
           </button>
-          <p className="mt-2 text-center text-xs text-slate-400">This demo button is client‑only; wire it to your backend or a form service.</p>
         </form>
       </div>
     </section>
@@ -225,7 +252,9 @@ function Footer() {
           <div className="h-5 w-5 rounded-md bg-gradient-to-br from-sky-400 via-violet-500 to-rose-400" />
           <span className="font-medium">Qasar Labs</span>
         </div>
-        <div className="text-sm">© {new Date().getFullYear()} Qasar Labs. All rights reserved.</div>
+        <div className="text-sm" suppressHydrationWarning>
+          © {new Date().getFullYear()} Qasar Labs. All rights reserved.
+        </div>
       </div>
     </footer>
   );
@@ -233,7 +262,7 @@ function Footer() {
 
 export default function Page() {
   return (
-    <main className="relative min-h-screen bg-black">
+    <main className="relative min-h-screen">
       <Background />
       <Nav />
       <Hero />
