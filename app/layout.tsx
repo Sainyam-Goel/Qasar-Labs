@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Qasar Labs — Precision Electrical Components for India's Power Infrastructure",
   description:
-    "CEA-aligned electrical equipment manufacturer in Karnal, Haryana. Epoxy APG castings, heat shrink tubing, VCB distribution, busbar trunking systems, and IEC 61850 networking for India's power sector.",
+    "CEA-aligned electrical equipment manufacturer. Epoxy APG castings, heat shrink tubing, VCB distribution, busbar trunking systems, and IEC 61850 networking for India's power sector.",
   openGraph: {
     title: "Qasar Labs — Electrical Equipment Manufacturing",
     description:
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-white text-slate-900 antialiased">{children}</body>
+      <body className="bg-page text-slate-900 antialiased">{children}</body>
     </html>
   );
 }

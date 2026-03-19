@@ -3,10 +3,123 @@
 @tailwind utilities;
 
 :root {
-  --bg: #ffffff;
+  --bg: #f8f9fb;
   --navy: #1e3a5f;
   --blue: #2563eb;
+  --accent: #0ea5e9;
 }
 
 html, body { height: 100%; }
 body { background-color: var(--bg); }
+
+/* ── Circuit-board background pattern ── */
+.circuit-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 1px 1px, #dde1e8 1px, transparent 0);
+  background-size: 48px 48px;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse 80% 50% at 50% 20%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 20%, black 20%, transparent 70%);
+}
+
+/* ── Float / breathe ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ── Pulse glow ── */
+@keyframes pulse-glow {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(37,99,235,0.25)); }
+  50% { filter: drop-shadow(0 0 18px rgba(37,99,235,0.55)); }
+}
+
+/* ── Stroke draw ── */
+@keyframes draw-path {
+  from { stroke-dashoffset: 800; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* ── Flow dashes ── */
+@keyframes flow-right {
+  from { stroke-dashoffset: 20; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* ── Electrical arc flicker ── */
+@keyframes arc-flicker {
+  0%, 100% { opacity: 0.2; }
+  8% { opacity: 1; }
+  18% { opacity: 0.3; }
+  28% { opacity: 0.9; }
+  48% { opacity: 0.15; }
+  68% { opacity: 0.75; }
+}
+
+/* ── Heat shrink contraction ── */
+@keyframes shrink-tube {
+  0%, 100% { transform: scaleX(1.25) scaleY(1); }
+  50% { transform: scaleX(0.88) scaleY(1.08); }
+}
+
+/* ── Data packet flow ── */
+@keyframes data-flow {
+  0% { transform: translateX(-20px); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateX(20px); opacity: 0; }
+}
+
+/* ── Power pulse ── */
+@keyframes power-pulse {
+  0% { opacity: 0; transform: translateX(-100%); }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% { opacity: 0; transform: translateX(100%); }
+}
+
+/* ── Heat wave ── */
+@keyframes heat-wave {
+  0%, 100% { opacity: 0; transform: translateY(0); }
+  50% { opacity: 0.6; transform: translateY(-6px); }
+}
+
+/* ── Resin drip ── */
+@keyframes resin-drip {
+  0% { transform: translateY(-10px); opacity: 0; }
+  20% { opacity: 0.8; }
+  100% { transform: translateY(40px); opacity: 0; }
+}
+
+/* ── LED blink ── */
+@keyframes led-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.3; }
+}
+
+/* ── Utility classes ── */
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-draw-path { stroke-dasharray: 800; animation: draw-path 2s ease-out forwards; }
+.animate-flow { stroke-dasharray: 8 8; animation: flow-right 0.8s linear infinite; }
+.animate-arc { animation: arc-flicker 2s ease-in-out infinite; }
+.animate-shrink { animation: shrink-tube 3s ease-in-out infinite; }
+.animate-data-flow { animation: data-flow 2s linear infinite; }
+.animate-power-pulse { animation: power-pulse 2.5s ease-in-out infinite; }
+.animate-heat-wave { animation: heat-wave 2s ease-in-out infinite; }
+.animate-resin-drip { animation: resin-drip 2.5s ease-in infinite; }
+.animate-led-blink { animation: led-blink 1.2s step-end infinite; }
+
+/* ── Respect reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float, .animate-pulse-glow, .animate-draw-path,
+  .animate-flow, .animate-arc, .animate-shrink,
+  .animate-data-flow, .animate-power-pulse, .animate-heat-wave,
+  .animate-resin-drip, .animate-led-blink {
+    animation: none !important;
+  }
+}
