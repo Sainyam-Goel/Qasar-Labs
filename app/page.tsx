@@ -1,31 +1,40 @@
 'use client';
 
-import dynamic from "next/dynamic";
 import { useState } from "react";
 
-const Background = dynamic(() => import("./components/NebulaBackground"), {
-  ssr: false,
-  loading: () => <div className="absolute inset-0 -z-10 bg-black" />,
-});
+/* ───────────────────────── Nav ───────────────────────── */
 
 function Nav() {
   const [open, setOpen] = useState(false);
+  const links = [
+    { label: "Products", href: "#products" },
+    { label: "Manufacturing", href: "#why" },
+    { label: "Market", href: "#market" },
+    { label: "Roadmap", href: "#roadmap" },
+    { label: "Contact", href: "#contact" },
+  ];
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 backdrop-blur bg-black/40">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <a href="#" className="flex items-center gap-3">
-          <div className="h-6 w-6 rounded-md bg-gradient-to-br from-sky-400 via-violet-500 to-rose-400" />
-          <span className="font-semibold tracking-wide text-white">Qasar Labs</span>
+          <div className="h-6 w-6 rounded-md bg-gradient-to-br from-[#1e3a5f] to-[#2563eb]" />
+          <span className="font-semibold tracking-wide text-[#1e3a5f]">Qasar Labs</span>
         </a>
-        <nav className="hidden items-center gap-8 text-sm text-slate-200 md:flex">
-          <a className="hover:text-white transition-colors" href="#work">Work</a>
-          <a className="hover:text-white transition-colors" href="#capabilities">Capabilities</a>
-          <a className="hover:text-white transition-colors" href="#approach">Approach</a>
-          <a className="hover:text-white transition-colors" href="#contact">Contact</a>
-          <a className="rounded-full bg-white/10 px-4 py-2 text-white hover:bg-white/20 transition-colors" href="#contact">Start a project</a>
+        <nav className="hidden items-center gap-8 text-sm text-slate-600 md:flex">
+          {links.map((l) => (
+            <a key={l.href} className="hover:text-[#1e3a5f] transition-colors" href={l.href}>
+              {l.label}
+            </a>
+          ))}
+          <a
+            className="rounded-full bg-[#1e3a5f] px-5 py-2 text-sm font-medium text-white hover:bg-[#15304d] transition-colors"
+            href="#contact"
+          >
+            Request Quote
+          </a>
         </nav>
         <button
-          className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+          className="md:hidden text-slate-700 p-2 rounded-lg hover:bg-slate-100 transition-colors"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -41,13 +50,25 @@ function Nav() {
         </button>
       </div>
       {open && (
-        <div className="md:hidden border-t border-white/10 bg-black/95 px-6 py-4">
-          <nav className="flex flex-col gap-4 text-sm text-slate-200">
-            <a className="hover:text-white transition-colors" href="#work" onClick={() => setOpen(false)}>Work</a>
-            <a className="hover:text-white transition-colors" href="#capabilities" onClick={() => setOpen(false)}>Capabilities</a>
-            <a className="hover:text-white transition-colors" href="#approach" onClick={() => setOpen(false)}>Approach</a>
-            <a className="hover:text-white transition-colors" href="#contact" onClick={() => setOpen(false)}>Contact</a>
-            <a className="rounded-full bg-white/10 px-4 py-2 text-white hover:bg-white/20 transition-colors text-center" href="#contact" onClick={() => setOpen(false)}>Start a project</a>
+        <div className="md:hidden border-t border-slate-200 bg-white px-6 py-4">
+          <nav className="flex flex-col gap-4 text-sm text-slate-600">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                className="hover:text-[#1e3a5f] transition-colors"
+                href={l.href}
+                onClick={() => setOpen(false)}
+              >
+                {l.label}
+              </a>
+            ))}
+            <a
+              className="rounded-full bg-[#1e3a5f] px-5 py-2 text-sm font-medium text-white hover:bg-[#15304d] transition-colors text-center"
+              href="#contact"
+              onClick={() => setOpen(false)}
+            >
+              Request Quote
+            </a>
           </nav>
         </div>
       )}
@@ -55,46 +76,64 @@ function Nav() {
   );
 }
 
+/* ───────────────────────── Hero ───────────────────────── */
+
 function Hero() {
   return (
-    <section className="relative flex min-h-screen items-center justify-center px-6 pt-24 text-center text-white">
+    <section className="relative flex min-h-[80vh] items-center justify-center px-6 pt-24 text-center">
+      {/* Subtle grid pattern */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(30,58,95,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(30,58,95,0.04) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
+      />
       <div className="mx-auto max-w-4xl">
-        <p className="mb-4 text-xs uppercase tracking-[0.3em] text-slate-300">Applied AI • Secure Systems • Custom Hardware</p>
-        <h1 className="text-4xl font-semibold leading-tight tracking-tight md:text-6xl">
-          Engineering reliable intelligence for the real world
+        <p className="mb-4 text-xs uppercase tracking-[0.3em] text-slate-500">
+          Electrical Equipment Manufacturing &bull; Karnal, Haryana
+        </p>
+        <h1 className="text-4xl font-semibold leading-tight tracking-tight text-[#1e3a5f] md:text-6xl">
+          Precision Electrical Components for India&apos;s Power Infrastructure
         </h1>
-        <p className="mx-auto mt-5 max-w-2xl text-slate-300">
-          We design, harden, and deploy edge‑to‑cloud AI systems for critical environments — from concept to field‑ready.
+        <p className="mx-auto mt-5 max-w-2xl text-slate-600">
+          CEA-aligned manufacturing of critical electrical equipment — from epoxy insulation systems to
+          smart grid networking. Reducing import dependence, one component at a time.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <a href="#contact" className="rounded-full bg-white px-6 py-3 font-medium text-black hover:bg-slate-100 transition-colors">
-            Engage Qasar Labs
+          <a
+            href="#products"
+            className="rounded-full bg-[#1e3a5f] px-6 py-3 font-medium text-white hover:bg-[#15304d] transition-colors"
+          >
+            Explore Products
           </a>
-          <a href="#work" className="rounded-full border border-white/30 px-6 py-3 font-medium text-white hover:bg-white/10 transition-colors">
-            See work
+          <a
+            href="#contact"
+            className="rounded-full border border-[#1e3a5f] px-6 py-3 font-medium text-[#1e3a5f] hover:bg-slate-50 transition-colors"
+          >
+            Partner With Us
           </a>
         </div>
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(900px_500px_at_50%_-10%,rgba(124,58,237,.18),transparent)]" />
       </div>
     </section>
   );
 }
 
-function LogoBelt() {
-  const logos = ["Kubernetes", "Docker", "WireGuard", "Ansible", "PyTorch", "ONNX", "NVIDIA", "ARM"];
+/* ───────────────────────── Trust Bar ───────────────────────── */
+
+function TrustBar() {
+  const badges = ["BIS Certified", "IEC Compliant", "CEA Localization Partner", "MSME Registered", "Make in India"];
   return (
-    <section className="relative border-t border-white/10 bg-black/40 py-10">
+    <section className="border-y border-slate-200 bg-slate-50 py-8">
       <div className="mx-auto max-w-6xl px-6">
-        <p className="mb-6 text-center text-xs uppercase tracking-[0.25em] text-slate-400">
-          Built on open standards, trusted by teams working at scale
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-          {logos.map((l) => (
+        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
+          {badges.map((b) => (
             <span
-              key={l}
-              className="text-sm font-semibold tracking-wide text-slate-400 hover:text-slate-200 transition-colors"
+              key={b}
+              className="text-sm font-semibold tracking-wide text-slate-500"
             >
-              {l}
+              {b}
             </span>
           ))}
         </div>
@@ -103,28 +142,54 @@ function LogoBelt() {
   );
 }
 
-function Capabilities() {
+/* ───────────────────────── Products ───────────────────────── */
+
+function Products() {
   const items = [
-    { title: "Private & Edge AI", body: "Compression, distillation, and retrieval tuned for low‑latency inference at the edge. Data never leaves your perimeter." },
-    { title: "DevSecOps & Platform Engineering", body: "Reproducible builds, zero‑trust networking, SBOMs, and policy‑as‑code. Supply‑chain security by default." },
-    { title: "Unique Hardware", body: "From ruggedized carriers to custom gateways. Thermal budgets met, EMI/EMC compliant, latency shaved to the bone." },
-    { title: "Model Evaluation & Safety", body: "Ground truth harnesses, red‑team pipelines, and continuous eval dashboards. Reliability you can measure." },
-    { title: "Data Tooling", body: "Labeling, weak supervision, and governance that survives audits. Privacy‑preserving by design." },
-    { title: "Systems Integration", body: "K8s, service mesh, observability, and fleet orchestration tuned for constrained, contested networks." }
+    {
+      title: "Epoxy APG Casting",
+      body: "MV insulators, bushings, CT/PT castings for switchgear OEMs. Automated Pressure Gelation with in-house HV testing.",
+      tag: "Phase 1",
+    },
+    {
+      title: "Heat Shrink Tubing",
+      body: "PVC & polyolefin busbar insulation rated up to 25kV. Continuous extrusion for panel builders and industrial OEMs.",
+      tag: "Phase 2",
+    },
+    {
+      title: "VCB Distribution & AMC",
+      body: "11kV/33kV vacuum circuit breaker panels, vacuum interrupters, and annual maintenance contracts for utilities.",
+      tag: "Phase 1",
+    },
+    {
+      title: "Busbar Trunking Systems",
+      body: "Compact air-insulated BTS for data centers, commercial buildings, and industrial power distribution.",
+      tag: "Phase 3",
+    },
+    {
+      title: "IEC 61850 Networking",
+      body: "Ruggedized Ethernet switches for digital substations. CEA priority localization item — currently 100% imported.",
+      tag: "Phase 3",
+    },
   ];
   return (
-    <section id="capabilities" className="relative py-20 text-white">
+    <section id="products" className="py-20">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Capabilities</h2>
-        <p className="mt-3 max-w-2xl text-slate-300">
-          Flexible engagement: audits, prototypes, pilots, and production programs. We prefer shipping to posturing.
+        <h2 className="text-2xl font-semibold tracking-tight text-[#1e3a5f] md:text-3xl">Products</h2>
+        <p className="mt-3 max-w-2xl text-slate-600">
+          A phased portfolio addressing CEA-identified critical imports — from high-margin castings to smart grid electronics.
         </p>
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {items.map((it) => (
-            <div key={it.title} className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-              <div className="mb-3 h-8 w-8 rounded-lg bg-gradient-to-br from-sky-400 via-violet-500 to-rose-400" />
-              <h3 className="text-lg font-semibold">{it.title}</h3>
-              <p className="mt-2 text-slate-300">{it.body}</p>
+            <div key={it.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="mb-3 flex items-center justify-between">
+                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#1e3a5f] to-[#2563eb]" />
+                <span className="rounded-full bg-blue-50 px-3 py-0.5 text-xs font-medium text-[#2563eb]">
+                  {it.tag}
+                </span>
+              </div>
+              <h3 className="text-lg font-semibold text-[#1e3a5f]">{it.title}</h3>
+              <p className="mt-2 text-slate-600">{it.body}</p>
             </div>
           ))}
         </div>
@@ -133,71 +198,39 @@ function Capabilities() {
   );
 }
 
-function SplitCase() {
-  return (
-    <section id="work" className="relative py-24 text-white">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 md:grid-cols-2">
-        <div className="order-2 md:order-1">
-          <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Edge inference in denied environments</h2>
-          <p className="mt-4 text-slate-300">
-            We deployed multi‑modal perception across a fleet with intermittent comms, hard power caps, and adversarial conditions.
-            Quantization + pruning brought latency from 78ms → 24ms (P95) while preserving accuracy.
-          </p>
-          <ul className="mt-6 space-y-2 text-slate-300">
-            <li>• P95 latency 3× improvement</li>
-            <li>• Energy per inference −41%</li>
-            <li>• Secure OTA with SBOM attestation</li>
-          </ul>
-        </div>
-        <div className="order-1 md:order-2">
-          <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center">
-            <div className="h-full w-full bg-[linear-gradient(120deg,rgba(14,165,233,.25),transparent),linear-gradient(300deg,rgba(168,85,247,.25),transparent)]" />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+/* ───────────────────────── Why Qasar Labs ───────────────────────── */
 
-function Numbers() {
-  const stats = [
-    { k: "Latency", v: "≤25 ms", s: "Edge vision P95" },
-    { k: "Deployments", v: "40+", s: "Fielded systems" },
-    { k: "Coverage", v: "24/7", s: "Observability & on‑call" },
-    { k: "Hardening", v: "CIS L2", s: "Baseline & audits" }
+function WhyQasar() {
+  const items = [
+    {
+      title: "Strategic Location",
+      body: "NH-44 corridor, Karnal — 2 hours from Delhi NCR. Direct access to North India\u2019s largest power equipment demand center.",
+    },
+    {
+      title: "CEA Aligned",
+      body: "Directly addressing the 73 critical imported components identified by India\u2019s Central Electricity Authority for localization.",
+    },
+    {
+      title: "Quality Certified",
+      body: "BIS & IEC certification pathway, in-house high-voltage testing lab, and full OEM qualification support.",
+    },
+    {
+      title: "Import Substitution",
+      body: "Reducing India\u2019s \u20B99,800 Cr dependence on Chinese electrical imports with domestically manufactured alternatives.",
+    },
   ];
   return (
-    <section className="relative border-y border-white/10 bg-black/40 py-16 text-white">
-      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 md:grid-cols-4">
-        {stats.map((s) => (
-          <div key={s.k} className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center">
-            <div className="text-sm uppercase tracking-widest text-slate-400">{s.k}</div>
-            <div className="mt-2 text-3xl font-semibold">{s.v}</div>
-            <div className="mt-1 text-slate-400">{s.s}</div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Approach() {
-  const steps = [
-    { t: "Discover", d: "We listen, read the room, and instrument the system." },
-    { t: "Design", d: "Threat model, constraints, and tests drive architecture." },
-    { t: "Develop", d: "Tight loops from prototype to pilot to production." },
-    { t: "Deploy", d: "Docs, SBOMs, and handover that survives real life." }
-  ];
-  return (
-    <section id="approach" className="relative py-20 text-white">
+    <section id="why" className="bg-slate-50 py-20">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Approach</h2>
-        <div className="mt-10 grid gap-6 md:grid-cols-4">
-          {steps.map((s) => (
-            <div key={s.t} className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="mb-3 h-8 w-8 rounded-lg bg-gradient-to-br from-sky-400 via-violet-500 to-rose-400" />
-              <h3 className="text-lg font-semibold">{s.t}</h3>
-              <p className="mt-2 text-slate-300">{s.d}</p>
+        <h2 className="text-2xl font-semibold tracking-tight text-[#1e3a5f] md:text-3xl">
+          Why Qasar Labs
+        </h2>
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {items.map((it) => (
+            <div key={it.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="mb-3 h-8 w-8 rounded-lg bg-gradient-to-br from-[#1e3a5f] to-[#2563eb]" />
+              <h3 className="text-lg font-semibold text-[#1e3a5f]">{it.title}</h3>
+              <p className="mt-2 text-slate-600">{it.body}</p>
             </div>
           ))}
         </div>
@@ -205,38 +238,151 @@ function Approach() {
     </section>
   );
 }
+
+/* ───────────────────────── Market Opportunity ───────────────────────── */
+
+function MarketOpportunity() {
+  const stats = [
+    { label: "Switchgear Market", value: "\u20B929,000 Cr", context: "Growing 7\u20139% CAGR" },
+    { label: "RDSS Investment", value: "\u20B93.04L Cr", context: "Smart grid & distribution" },
+    { label: "Solar Target", value: "500 GW", context: "Driving BOS demand" },
+    { label: "CEA Priority Items", value: "73", context: "Critical imports flagged" },
+  ];
+  return (
+    <section id="market" className="border-y border-slate-200 py-16">
+      <div className="mx-auto max-w-6xl px-6">
+        <h2 className="mb-10 text-center text-2xl font-semibold tracking-tight text-[#1e3a5f] md:text-3xl">
+          Market Opportunity
+        </h2>
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+          {stats.map((s) => (
+            <div key={s.label} className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
+              <div className="text-xs uppercase tracking-widest text-slate-500">{s.label}</div>
+              <div className="mt-2 text-3xl font-semibold text-[#1e3a5f]">{s.value}</div>
+              <div className="mt-1 text-sm text-slate-500">{s.context}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────────────── Roadmap ───────────────────────── */
+
+function Roadmap() {
+  const phases = [
+    {
+      phase: "Phase 1",
+      timeline: "Year 0\u20131",
+      title: "Foundation",
+      body: "Epoxy APG casting facility + VCB/switchgear distribution network. Investment: \u20B98\u201310 Cr.",
+    },
+    {
+      phase: "Phase 2",
+      timeline: "Year 2\u20133",
+      title: "Expansion",
+      body: "Add heat shrink tubing extrusion line for busbar insulation. Incremental: \u20B92\u20133 Cr.",
+    },
+    {
+      phase: "Phase 3",
+      timeline: "Year 3\u20135",
+      title: "Full Portfolio",
+      body: "Busbar trunking assembly or IEC 61850 switch manufacturing. Investment: \u20B95\u201310 Cr.",
+    },
+  ];
+  return (
+    <section id="roadmap" className="py-20">
+      <div className="mx-auto max-w-6xl px-6">
+        <h2 className="text-2xl font-semibold tracking-tight text-[#1e3a5f] md:text-3xl">Roadmap</h2>
+        <p className="mt-3 max-w-2xl text-slate-600">
+          Year 5 target: &#8377;40&ndash;60 Cr revenue at 15&ndash;20% EBITDA margins.
+        </p>
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
+          {phases.map((p) => (
+            <div key={p.phase} className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <span className="rounded-full bg-blue-50 px-3 py-0.5 text-xs font-medium text-[#2563eb]">
+                {p.phase} &middot; {p.timeline}
+              </span>
+              <h3 className="mt-4 text-lg font-semibold text-[#1e3a5f]">{p.title}</h3>
+              <p className="mt-2 text-slate-600">{p.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────────────── Contact ───────────────────────── */
 
 function Contact() {
   return (
-    <section id="contact" className="relative py-24 text-white">
+    <section id="contact" className="bg-slate-50 py-24">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Start a project</h2>
-          <p className="mt-3 max-w-xl text-slate-300">
-            Tell us about your constraints. We&apos;ll bring clarity, not jargon.
+          <h2 className="text-2xl font-semibold tracking-tight text-[#1e3a5f] md:text-3xl">
+            Start a Conversation
+          </h2>
+          <p className="mt-3 max-w-xl text-slate-600">
+            Whether you&apos;re sourcing components, exploring partnership, or evaluating investment —
+            we&apos;d like to hear from you.
           </p>
-          <div className="mt-8 space-y-3 text-slate-300">
-            <div>✉︎ hello@qasarlabs.com</div>
-            <div>Mon–Fri · 09:00–18:00 IST</div>
+          <div className="mt-8 space-y-3 text-slate-600">
+            <div>&#9993; hello@qasarlabs.com</div>
+            <div>&#128205; Karnal, Haryana, India</div>
+            <div>Mon&ndash;Fri &middot; 09:00&ndash;18:00 IST</div>
           </div>
         </div>
-        <form className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur" onSubmit={(e) => e.preventDefault()}>
+        <form
+          className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+          onSubmit={(e) => e.preventDefault()}
+        >
           <div className="grid gap-4 md:grid-cols-2">
             <div>
-              <label className="text-sm text-slate-300">Name</label>
-              <input className="mt-1 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 outline-none ring-white/20 focus:ring" placeholder="Your name" />
+              <label className="text-sm text-slate-600">Name</label>
+              <input
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 outline-none ring-blue-200 focus:ring-2"
+                placeholder="Your name"
+              />
             </div>
             <div>
-              <label className="text-sm text-slate-300">Email</label>
-              <input type="email" className="mt-1 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 outline-none ring-white/20 focus:ring" placeholder="you@company.com" />
+              <label className="text-sm text-slate-600">Company</label>
+              <input
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 outline-none ring-blue-200 focus:ring-2"
+                placeholder="Company name"
+              />
+            </div>
+            <div>
+              <label className="text-sm text-slate-600">Email</label>
+              <input
+                type="email"
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 outline-none ring-blue-200 focus:ring-2"
+                placeholder="you@company.com"
+              />
+            </div>
+            <div>
+              <label className="text-sm text-slate-600">I am a&hellip;</label>
+              <select className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 outline-none ring-blue-200 focus:ring-2">
+                <option>Customer / OEM</option>
+                <option>Investor</option>
+                <option>Partner / Distributor</option>
+              </select>
             </div>
             <div className="md:col-span-2">
-              <label className="text-sm text-slate-300">Project brief</label>
-              <textarea rows={4} className="mt-1 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 outline-none ring-white/20 focus:ring" placeholder="What are you building? Where does it run? What&apos;s hard?" />
+              <label className="text-sm text-slate-600">Message</label>
+              <textarea
+                rows={4}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 outline-none ring-blue-200 focus:ring-2"
+                placeholder="Tell us about your requirements or interest&hellip;"
+              />
             </div>
           </div>
-          <button type="submit" className="mt-6 w-full rounded-lg bg-white px-4 py-2 font-medium text-black hover:bg-slate-100 transition-colors">
-            Send inquiry
+          <button
+            type="submit"
+            className="mt-6 w-full rounded-lg bg-[#1e3a5f] px-4 py-2.5 font-medium text-white hover:bg-[#15304d] transition-colors"
+          >
+            Send Inquiry
           </button>
         </form>
       </div>
@@ -244,33 +390,36 @@ function Contact() {
   );
 }
 
+/* ───────────────────────── Footer ───────────────────────── */
+
 function Footer() {
   return (
-    <footer className="relative border-t border-white/10 py-10 text-slate-400">
+    <footer className="border-t border-slate-200 py-10 text-slate-500">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 md:flex-row">
-        <div className="flex items-center gap-3 text-white">
-          <div className="h-5 w-5 rounded-md bg-gradient-to-br from-sky-400 via-violet-500 to-rose-400" />
+        <div className="flex items-center gap-3 text-[#1e3a5f]">
+          <div className="h-5 w-5 rounded-md bg-gradient-to-br from-[#1e3a5f] to-[#2563eb]" />
           <span className="font-medium">Qasar Labs</span>
         </div>
         <div className="text-sm" suppressHydrationWarning>
-          © {new Date().getFullYear()} Qasar Labs. All rights reserved.
+          &copy; {new Date().getFullYear()} Qasar Labs. All rights reserved.
         </div>
       </div>
     </footer>
   );
 }
 
+/* ───────────────────────── Page ───────────────────────── */
+
 export default function Page() {
   return (
     <main className="relative min-h-screen">
-      <Background />
       <Nav />
       <Hero />
-      <LogoBelt />
-      <Capabilities />
-      <SplitCase />
-      <Numbers />
-      <Approach />
+      <TrustBar />
+      <Products />
+      <WhyQasar />
+      <MarketOpportunity />
+      <Roadmap />
       <Contact />
       <Footer />
     </main>
