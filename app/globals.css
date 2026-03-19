@@ -12,6 +12,11 @@
 html, body { height: 100%; }
 body { background-color: var(--bg); }
 
+/* ── Dark mode variables ── */
+.dark {
+  --bg: #0a0f1a;
+}
+
 /* ── Circuit-board background pattern ── */
 .circuit-bg {
   position: fixed;
@@ -24,6 +29,23 @@ body { background-color: var(--bg); }
   opacity: 0.5;
   mask-image: radial-gradient(ellipse 80% 50% at 50% 20%, black 20%, transparent 70%);
   -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 20%, black 20%, transparent 70%);
+}
+
+.dark .circuit-bg {
+  background-image:
+    radial-gradient(circle at 1px 1px, #334155 1px, transparent 0);
+  opacity: 0.4;
+}
+
+/* ── Dark mode SVG text labels ── */
+.dark .svg-illustration text {
+  fill: #cbd5e1;
+}
+
+/* ── Dark mode form inputs ── */
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #64748b;
 }
 
 /* ── Float / breathe ── */

@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 export default {
+  darkMode: 'class',
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}"
@@ -13,6 +14,8 @@ export default {
         surface: '#ffffff',
         page: '#f8f9fb',
         'section-alt': '#f1f4f8',
+        'tint-blue': '#eef4fb',
+        'tint-green': '#eef7f2',
       }
     }
   },

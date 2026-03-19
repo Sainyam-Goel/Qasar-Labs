@@ -6,12 +6,12 @@ const badges = ['BIS Certified', 'IEC Compliant', 'CEA Localization Partner', 'M
 
 export default function TrustBar() {
   return (
-    <section className="border-y border-slate-200 bg-white py-8">
+    <section className="border-y border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 py-8">
       <div className="mx-auto max-w-6xl px-6">
         <AnimatedSection direction="fade">
           <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
             {badges.map((b) => (
-              <span key={b} className="text-sm font-semibold tracking-wide text-slate-400">
+              <span key={b} className="text-sm font-semibold tracking-wide text-slate-400 dark:text-slate-500">
                 {b}
               </span>
             ))}
